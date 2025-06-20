@@ -7,6 +7,10 @@ import logging
 import math
 import time
 from datetime import datetime, timedelta
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Enable logging
 logging.basicConfig(
@@ -15,8 +19,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Bot token from BotFather
-TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+# Get bot token from environment variable
+TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
+if not TOKEN:
+    raise ValueError("No TELEGRAM_BOT_TOKEN found in environment variables")
 
 # Maximum file size Telegram can handle (4GB in bytes)
 MAX_FILE_SIZE = 4 * 1024 * 1024 * 1024
